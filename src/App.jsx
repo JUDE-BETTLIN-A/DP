@@ -78,64 +78,6 @@ const portfolioData = {
   }
 }
 
-// Function to generate random positions avoiding the center (profile area)
-const generateRandomPositions = () => {
-  const centerX = window.innerWidth / 2
-  const centerY = window.innerHeight / 2
-  const profileRadius = 200 // Radius around profile to avoid
-  const cardWidth = 200
-  const cardHeight = 80
-  const padding = 50
-
-  // Define zones around the center where cards can be placed
-  const zones = [
-    // Top-left zone
-    { minX: padding, maxX: centerX - profileRadius - cardWidth, minY: padding, maxY: centerY - profileRadius },
-    // Top-right zone
-    { minX: centerX + profileRadius, maxX: window.innerWidth - cardWidth - padding, minY: padding, maxY: centerY - profileRadius },
-    // Bottom-left zone
-    { minX: padding, maxX: centerX - profileRadius - cardWidth, minY: centerY + profileRadius, maxY: window.innerHeight - cardHeight - padding },
-    // Bottom-right zone
-    { minX: centerX + profileRadius, maxX: window.innerWidth - cardWidth - padding, minY: centerY + profileRadius, maxY: window.innerHeight - cardHeight - padding },
-    // Left side (middle)
-    { minX: padding, maxX: centerX - profileRadius - cardWidth, minY: centerY - 50, maxY: centerY + 50 },
-    // Right side (middle)
-    { minX: centerX + profileRadius, maxX: window.innerWidth - cardWidth - padding, minY: centerY - 50, maxY: centerY + 50 }
-  ]
-
-  const getRandomInRange = (min, max) => Math.random() * (max - min) + min
-
-  // Assign each card to a different zone for scattered effect
-  const positions = {
-    education: {
-      x: getRandomInRange(zones[0].minX, Math.max(zones[0].minX + 50, zones[0].maxX)),
-      y: getRandomInRange(zones[0].minY, Math.max(zones[0].minY + 50, zones[0].maxY))
-    },
-    projects: {
-      x: getRandomInRange(zones[1].minX, Math.max(zones[1].minX + 50, zones[1].maxX)),
-      y: getRandomInRange(zones[1].minY, Math.max(zones[1].minY + 50, zones[1].maxY))
-    },
-    certifications: {
-      x: getRandomInRange(zones[2].minX, Math.max(zones[2].minX + 50, zones[2].maxX)),
-      y: getRandomInRange(zones[2].minY, Math.max(zones[2].minY + 50, zones[2].maxY))
-    },
-    contact: {
-      x: getRandomInRange(zones[3].minX, Math.max(zones[3].minX + 50, zones[3].maxX)),
-      y: getRandomInRange(zones[3].minY, Math.max(zones[3].minY + 50, zones[3].maxY))
-    },
-    experience: {
-      x: getRandomInRange(zones[4].minX, Math.max(zones[4].minX + 50, zones[4].maxX)),
-      y: getRandomInRange(zones[4].minY, Math.max(zones[4].minY + 50, zones[4].maxY))
-    },
-    skills: {
-      x: getRandomInRange(zones[5].minX, Math.max(zones[5].minX + 50, zones[5].maxX)),
-      y: getRandomInRange(zones[5].minY, Math.max(zones[5].minY + 50, zones[5].maxY))
-    }
-  }
-
-  return positions
-}
-
 // Navigation cards data
 const navCards = [
   { id: 'education', label: 'Education', sublabel: '2 Institutions', icon: '🎓', gradient: 'bg-gradient-1' },
@@ -146,106 +88,138 @@ const navCards = [
   { id: 'contact', label: 'Contact', sublabel: 'Get in Touch', icon: '📬', gradient: 'bg-gradient-6' }
 ]
 
-// Draggable Card Component
-function DraggableCard({ card, position, onPositionChange, onClick }) {
-  const cardRef = useRef(null)
-  const [isDragging, setIsDragging] = useState(false)
-  const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
-  const [hasMoved, setHasMoved] = useState(false)
+// Card dimensions (must match CSS)
+const CARD_W = 150
+const CARD_H = 130
+const PROFILE_ZONE = 160 // radius around center to avoid
 
-  const handleMouseDown = (e) => {
-    e.preventDefault()
-    setIsDragging(true)
-    setHasMoved(false)
-    setDragStart({
-      x: e.clientX - position.x,
-      y: e.clientY - position.y
-    })
-  }
+// Floating Card — moves randomly across the full page
+function FloatingCard({ card, index, total, onClick }) {
+  const ref = useRef(null)
+  const pos = useRef({ x: 0, y: 0 })
+  const vel = useRef({ x: 0, y: 0 })
+  const anim = useRef(null)
+  const hovered = useRef(false)
 
-  const handleMouseMove = (e) => {
-    if (!isDragging) return
-
-    const newX = e.clientX - dragStart.x
-    const newY = e.clientY - dragStart.y
-
-    // Check if moved more than 5px to consider it a drag
-    if (Math.abs(newX - position.x) > 5 || Math.abs(newY - position.y) > 5) {
-      setHasMoved(true)
-    }
-
-    onPositionChange(card.id, { x: newX, y: newY })
-  }
-
-  const handleMouseUp = () => {
-    setIsDragging(false)
-    // Only trigger click if we haven't moved
-    if (!hasMoved) {
-      onClick(card.id)
-    }
-  }
+  const SPEED = 0.3
 
   useEffect(() => {
-    if (isDragging) {
-      window.addEventListener('mousemove', handleMouseMove)
-      window.addEventListener('mouseup', handleMouseUp)
+    const vw = window.innerWidth
+    const vh = window.innerHeight
+    const cx = vw / 2
+    const cy = vh / 2
+    const padding = 30
+
+    // Start positions: spread cards in different areas of the screen
+    const startAngles = [
+      { x: padding, y: padding },                                       // top-left
+      { x: vw - CARD_W - padding, y: padding },                         // top-right
+      { x: padding, y: vh - CARD_H - padding },                         // bottom-left
+      { x: vw - CARD_W - padding, y: vh - CARD_H - padding },           // bottom-right
+      { x: padding, y: cy - CARD_H / 2 },                               // mid-left
+      { x: vw - CARD_W - padding, y: cy - CARD_H / 2 },                 // mid-right
+    ]
+
+    const startPos = startAngles[index % startAngles.length]
+    pos.current = { x: startPos.x, y: startPos.y }
+
+    // Random initial direction
+    const a = Math.random() * Math.PI * 2
+    vel.current = { x: Math.cos(a) * SPEED, y: Math.sin(a) * SPEED }
+
+    let frame = 0
+
+    const animate = () => {
+      if (!hovered.current) {
+        frame++
+
+        // Gently change direction periodically
+        if (frame % 250 === 0) {
+          const nudge = (Math.random() - 0.5) * Math.PI * 0.6
+          const c = Math.cos(nudge)
+          const s = Math.sin(nudge)
+          const vx = vel.current.x
+          const vy = vel.current.y
+          vel.current = { x: vx * c - vy * s, y: vx * s + vy * c }
+        }
+
+        let nx = pos.current.x + vel.current.x
+        let ny = pos.current.y + vel.current.y
+
+        const curVw = window.innerWidth
+        const curVh = window.innerHeight
+
+        // Bounce off walls
+        if (nx < padding) {
+          nx = padding
+          vel.current.x = Math.abs(vel.current.x)
+        }
+        if (nx > curVw - CARD_W - padding) {
+          nx = curVw - CARD_W - padding
+          vel.current.x = -Math.abs(vel.current.x)
+        }
+        if (ny < padding) {
+          ny = padding
+          vel.current.y = Math.abs(vel.current.y)
+        }
+        if (ny > curVh - CARD_H - padding) {
+          ny = curVh - CARD_H - padding
+          vel.current.y = -Math.abs(vel.current.y)
+        }
+
+        // Avoid the center profile zone
+        const cardCx = nx + CARD_W / 2
+        const cardCy = ny + CARD_H / 2
+        const curCx = curVw / 2
+        const curCy = curVh / 2
+        const dx = cardCx - curCx
+        const dy = cardCy - curCy
+        const dist = Math.sqrt(dx * dx + dy * dy)
+
+        if (dist < PROFILE_ZONE) {
+          // Push card outward
+          const pushAngle = Math.atan2(dy, dx)
+          nx = curCx + Math.cos(pushAngle) * PROFILE_ZONE - CARD_W / 2
+          ny = curCy + Math.sin(pushAngle) * PROFILE_ZONE - CARD_H / 2
+          // Deflect velocity outward
+          vel.current = {
+            x: Math.cos(pushAngle) * SPEED,
+            y: Math.sin(pushAngle) * SPEED
+          }
+        }
+
+        pos.current = { x: nx, y: ny }
+      }
+
+      if (ref.current) {
+        ref.current.style.left = pos.current.x + 'px'
+        ref.current.style.top = pos.current.y + 'px'
+      }
+
+      anim.current = requestAnimationFrame(animate)
     }
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove)
-      window.removeEventListener('mouseup', handleMouseUp)
-    }
-  }, [isDragging, dragStart, hasMoved])
+
+    anim.current = requestAnimationFrame(animate)
+    return () => { if (anim.current) cancelAnimationFrame(anim.current) }
+  }, [index, total])
 
   return (
     <div
-      ref={cardRef}
-      className={`floating-card draggable ${isDragging ? 'dragging' : ''}`}
-      style={{
-        left: position.x,
-        top: position.y,
-        cursor: isDragging ? 'grabbing' : 'grab',
-        zIndex: isDragging ? 1000 : 10
-      }}
-      onMouseDown={handleMouseDown}
+      ref={ref}
+      className="floating-card"
+      onMouseEnter={() => { hovered.current = true }}
+      onMouseLeave={() => { hovered.current = false }}
+      onClick={() => onClick(card.id)}
     >
-      <div className={`icon ${card.gradient}`}>{card.icon}</div>
-      <div>
-        <div className="label">{card.label}</div>
-        <div className="sublabel">{card.sublabel}</div>
-      </div>
+      <div className={`fc-icon ${card.gradient}`}>{card.icon}</div>
+      <div className="fc-label">{card.label}</div>
+      <div className="fc-sublabel">{card.sublabel}</div>
     </div>
   )
 }
 
 function App() {
   const [activeSection, setActiveSection] = useState(null)
-  const [cardPositions, setCardPositions] = useState(() => generateRandomPositions())
-
-  // Regenerate positions on window resize to keep cards in valid zones
-  useEffect(() => {
-    const handleResize = () => {
-      // Keep cards within bounds on resize
-      setCardPositions(prev => {
-        const newPositions = {}
-        Object.keys(prev).forEach(cardId => {
-          newPositions[cardId] = {
-            x: Math.max(50, Math.min(prev[cardId].x, window.innerWidth - 250)),
-            y: Math.max(50, Math.min(prev[cardId].y, window.innerHeight - 100))
-          }
-        })
-        return newPositions
-      })
-    }
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  const handlePositionChange = (cardId, newPosition) => {
-    setCardPositions(prev => ({
-      ...prev,
-      [cardId]: newPosition
-    }))
-  }
 
   const handleCardClick = (sectionId) => {
     setActiveSection(sectionId)
@@ -266,9 +240,8 @@ function App() {
       <div className="ambient-glow glow-3"></div>
 
       {!activeSection ? (
-        // Hero Section with Profile and Floating Cards
         <div className="hero">
-          {/* Center Profile */}
+          {/* Center Profile — fixed in the middle */}
           <div className="profile-section">
             <div className="profile-image-wrapper">
               <img
@@ -276,30 +249,24 @@ function App() {
                 alt={portfolioData.profile.name}
                 className="profile-image"
               />
-              <div className="profile-ring"></div>
             </div>
             <h1 className="profile-name">{portfolioData.profile.name}</h1>
             <p className="profile-title">{portfolioData.profile.title}</p>
-            <p className="profile-location">
-              📍 {portfolioData.profile.location}
-            </p>
+            <p className="profile-location">📍 {portfolioData.profile.location}</p>
           </div>
 
-          {/* Draggable Navigation Cards */}
-          <div className="floating-cards">
-            {navCards.map((card) => (
-              <DraggableCard
-                key={card.id}
-                card={card}
-                position={cardPositions[card.id]}
-                onPositionChange={handlePositionChange}
-                onClick={handleCardClick}
-              />
-            ))}
-          </div>
+          {/* Floating Cards — roam the entire page */}
+          {navCards.map((card, index) => (
+            <FloatingCard
+              key={card.id}
+              card={card}
+              index={index}
+              total={navCards.length}
+              onClick={handleCardClick}
+            />
+          ))}
         </div>
       ) : (
-        // Content Sections
         <div className="section">
           <button className="back-button" onClick={handleBack}>
             ← Back to Home
