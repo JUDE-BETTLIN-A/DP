@@ -308,10 +308,6 @@ function HeroSection() {
       </div>
 
       <div className="hero-content">
-        <div className="hero-badge">
-          <span className="hero-badge-dot"></span>
-          <TypeWriter text="Available for opportunities" speed={35} delay={300} cursor={false} />
-        </div>
 
         <h1 className="hero-title">
           <span className="line">
@@ -339,26 +335,21 @@ function HeroSection() {
         <div className="hero-stats">
           <div className="hero-stat box-pulse">
             <div className="hero-stat-number"><TypeWriter text="3+" speed={80} delay={2600} cursor={false} /></div>
-            <div className="hero-stat-label"><TypeWriter text="Internships" speed={40} delay={2700} cursor={false} /></div>
+            <div className="hero-stat-label"><TypeWriter text="💼 Internships" speed={40} delay={2700} cursor={false} /></div>
           </div>
           <div className="hero-stat box-pulse">
             <div className="hero-stat-number"><TypeWriter text="8" speed={80} delay={2800} cursor={false} /></div>
-            <div className="hero-stat-label"><TypeWriter text="Projects" speed={40} delay={2900} cursor={false} /></div>
+            <div className="hero-stat-label"><TypeWriter text="🚀 Projects" speed={40} delay={2900} cursor={false} /></div>
           </div>
           <div className="hero-stat box-pulse">
             <div className="hero-stat-number"><TypeWriter text="4" speed={80} delay={3000} cursor={false} /></div>
-            <div className="hero-stat-label"><TypeWriter text="Certifications" speed={40} delay={3100} cursor={false} /></div>
+            <div className="hero-stat-label"><TypeWriter text="🏆 Certifications" speed={40} delay={3100} cursor={false} /></div>
           </div>
           <div className="hero-stat box-pulse">
             <div className="hero-stat-number"><TypeWriter text="8.0" speed={80} delay={3200} cursor={false} /></div>
-            <div className="hero-stat-label"><TypeWriter text="CGPA" speed={40} delay={3300} cursor={false} /></div>
+            <div className="hero-stat-label"><TypeWriter text="📊 CGPA" speed={40} delay={3300} cursor={false} /></div>
           </div>
         </div>
-      </div>
-
-      <div className="scroll-indicator">
-        <div className="scroll-mouse"></div>
-        <span className="scroll-text"><TypeWriter text="Scroll to explore" speed={40} delay={3500} cursor={false} /></span>
       </div>
     </section>
   )
