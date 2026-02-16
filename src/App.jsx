@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import './App.css'
+import TypeWriter from './TypeWriter'
 
 // ─── Portfolio Data ─────────────────────────────────────────
 const portfolioData = {
@@ -309,25 +310,22 @@ function HeroSection() {
       <div className="hero-content">
         <div className="hero-badge">
           <span className="hero-badge-dot"></span>
-          Available for opportunities
+          <TypeWriter text="Available for opportunities" speed={35} delay={300} cursor={false} />
         </div>
 
         <h1 className="hero-title">
           <span className="line">
-            <span className="line-inner">Hi, I'm</span>
+            <span className="line-inner"><TypeWriter text="Hi, I'm" speed={50} delay={500} /></span>
           </span>
           <span className="line">
-            <span className="line-inner gradient-text">{portfolioData.profile.name}</span>
+            <span className="line-inner gradient-text"><TypeWriter text={portfolioData.profile.name} speed={60} delay={900} /></span>
           </span>
           <span className="line">
-            <span className="line-inner">{portfolioData.profile.title}</span>
+            <span className="line-inner"><TypeWriter text={portfolioData.profile.title} speed={45} delay={1500} /></span>
           </span>
         </h1>
 
-        <p className="hero-description">
-          Building scalable full-stack applications with Java, Spring Boot & React.
-          Currently pursuing B.Tech in AI & Data Science at SNS College of Engineering.
-        </p>
+        <TypeWriter tag="p" className="hero-description" text="Building scalable full-stack applications with Java, Spring Boot & React. Currently pursuing B.Tech in AI & Data Science at SNS College of Engineering." speed={18} delay={2200} />
 
         <div className="hero-actions">
           <a href="#projects" className="btn-primary">
@@ -340,27 +338,27 @@ function HeroSection() {
 
         <div className="hero-stats">
           <div className="hero-stat box-pulse">
-            <div className="hero-stat-number">3+</div>
-            <div className="hero-stat-label">Internships</div>
+            <div className="hero-stat-number"><TypeWriter text="3+" speed={80} delay={2600} cursor={false} /></div>
+            <div className="hero-stat-label"><TypeWriter text="Internships" speed={40} delay={2700} cursor={false} /></div>
           </div>
           <div className="hero-stat box-pulse">
-            <div className="hero-stat-number">8</div>
-            <div className="hero-stat-label">Projects</div>
+            <div className="hero-stat-number"><TypeWriter text="8" speed={80} delay={2800} cursor={false} /></div>
+            <div className="hero-stat-label"><TypeWriter text="Projects" speed={40} delay={2900} cursor={false} /></div>
           </div>
           <div className="hero-stat box-pulse">
-            <div className="hero-stat-number">4</div>
-            <div className="hero-stat-label">Certifications</div>
+            <div className="hero-stat-number"><TypeWriter text="4" speed={80} delay={3000} cursor={false} /></div>
+            <div className="hero-stat-label"><TypeWriter text="Certifications" speed={40} delay={3100} cursor={false} /></div>
           </div>
           <div className="hero-stat box-pulse">
-            <div className="hero-stat-number">8.0</div>
-            <div className="hero-stat-label">CGPA</div>
+            <div className="hero-stat-number"><TypeWriter text="8.0" speed={80} delay={3200} cursor={false} /></div>
+            <div className="hero-stat-label"><TypeWriter text="CGPA" speed={40} delay={3300} cursor={false} /></div>
           </div>
         </div>
       </div>
 
       <div className="scroll-indicator">
         <div className="scroll-mouse"></div>
-        <span className="scroll-text">Scroll to explore</span>
+        <span className="scroll-text"><TypeWriter text="Scroll to explore" speed={40} delay={3500} cursor={false} /></span>
       </div>
     </section>
   )
@@ -376,9 +374,9 @@ function AboutSection() {
     <section className="section" id="about">
       <div className="section-container">
         <div className="section-header reveal" ref={headerRef}>
-          <span className="section-label">👋 About Me</span>
-          <h2 className="section-title">Know Who I Am</h2>
-          <p className="section-subtitle">A quick look at my background and what drives me</p>
+          <span className="section-label"><TypeWriter text="👋 About Me" speed={40} cursor={false} /></span>
+          <TypeWriter tag="h2" className="section-title" text="Know Who I Am" speed={40} />
+          <TypeWriter tag="p" className="section-subtitle" text="A quick look at my background and what drives me" speed={20} delay={300} cursor={false} />
         </div>
 
         <div className="about-grid">
@@ -388,36 +386,36 @@ function AboutSection() {
           </div>
 
           <div className="about-text reveal-right" ref={textRef}>
-            <h3>Full Stack Developer &<br />AI Enthusiast</h3>
-            <p>{portfolioData.profile.summary}</p>
+            <TypeWriter tag="h3" text="Full Stack Developer & AI Enthusiast" speed={35} />
+            <TypeWriter tag="p" text={portfolioData.profile.summary} speed={12} delay={400} />
 
             <div className="about-info-grid">
               <div className="about-info-item">
                 <div className="about-info-icon">📍</div>
                 <div className="about-info-content">
-                  <div className="about-info-label">Location</div>
-                  <div className="about-info-value">{portfolioData.profile.location}</div>
+                  <div className="about-info-label"><TypeWriter text="Location" speed={35} cursor={false} /></div>
+                  <div className="about-info-value"><TypeWriter text={portfolioData.profile.location} speed={30} cursor={false} /></div>
                 </div>
               </div>
               <div className="about-info-item">
                 <div className="about-info-icon">🎓</div>
                 <div className="about-info-content">
-                  <div className="about-info-label">Education</div>
-                  <div className="about-info-value">B.Tech AI & DS</div>
+                  <div className="about-info-label"><TypeWriter text="Education" speed={35} cursor={false} /></div>
+                  <div className="about-info-value"><TypeWriter text="B.Tech AI & DS" speed={30} cursor={false} /></div>
                 </div>
               </div>
               <div className="about-info-item">
                 <div className="about-info-icon">💼</div>
                 <div className="about-info-content">
-                  <div className="about-info-label">Current Role</div>
-                  <div className="about-info-value">Full Stack Intern</div>
+                  <div className="about-info-label"><TypeWriter text="Current Role" speed={35} cursor={false} /></div>
+                  <div className="about-info-value"><TypeWriter text="Full Stack Intern" speed={30} cursor={false} /></div>
                 </div>
               </div>
               <div className="about-info-item">
                 <div className="about-info-icon">📊</div>
                 <div className="about-info-content">
-                  <div className="about-info-label">CGPA</div>
-                  <div className="about-info-value">8.0 / 10</div>
+                  <div className="about-info-label"><TypeWriter text="CGPA" speed={35} cursor={false} /></div>
+                  <div className="about-info-value"><TypeWriter text="8.0 / 10" speed={30} cursor={false} /></div>
                 </div>
               </div>
             </div>
@@ -439,9 +437,9 @@ function ExperienceSection() {
       <ParticleBoxes />
       <div className="section-container">
         <div className="section-header reveal" ref={headerRef}>
-          <span className="section-label">💼 Experience</span>
-          <h2 className="section-title">My Professional Journey</h2>
-          <p className="section-subtitle">Roles where I've grown as a developer</p>
+          <span className="section-label"><TypeWriter text="💼 Experience" speed={40} cursor={false} /></span>
+          <TypeWriter tag="h2" className="section-title" text="My Professional Journey" speed={40} />
+          <TypeWriter tag="p" className="section-subtitle" text="Roles where I've grown as a developer" speed={20} delay={300} cursor={false} />
         </div>
 
         <div className="timeline" ref={timelineRef}>
@@ -449,10 +447,10 @@ function ExperienceSection() {
             <div key={i} className={`timeline-item reveal stagger-${i + 1}`}>
               <div className="timeline-dot"></div>
               <div className="timeline-card shimmer-card corner-box">
-                <span className="timeline-date">{exp.duration}</span>
-                <h3 className="timeline-role">{exp.role}</h3>
-                <div className="timeline-company">{exp.company}</div>
-                <p className="timeline-desc">{exp.description}</p>
+                <span className="timeline-date"><TypeWriter text={exp.duration} speed={30} cursor={false} /></span>
+                <TypeWriter tag="h3" className="timeline-role" text={exp.role} speed={30} />
+                <div className="timeline-company"><TypeWriter text={exp.company} speed={25} cursor={false} /></div>
+                <TypeWriter tag="p" className="timeline-desc" text={exp.description} speed={12} delay={200} cursor={false} />
               </div>
             </div>
           ))}
@@ -472,9 +470,9 @@ function EducationSection() {
     <section className="section" id="education" style={{ position: 'relative' }}>
       <div className="section-container">
         <div className="section-header reveal" ref={headerRef}>
-          <span className="section-label">🎓 Education</span>
-          <h2 className="section-title">Academic Background</h2>
-          <p className="section-subtitle">My educational foundation</p>
+          <span className="section-label"><TypeWriter text="🎓 Education" speed={40} cursor={false} /></span>
+          <TypeWriter tag="h2" className="section-title" text="Academic Background" speed={40} />
+          <TypeWriter tag="p" className="section-subtitle" text="My educational foundation" speed={20} delay={300} cursor={false} />
         </div>
 
         <div className="timeline" ref={gridRef}>
@@ -482,10 +480,10 @@ function EducationSection() {
             <div key={i} className={`timeline-item reveal stagger-${i + 1}`}>
               <div className="timeline-dot"></div>
               <div className="timeline-card shimmer-card corner-box">
-                <span className="timeline-date">{edu.duration}</span>
-                <h3 className="timeline-role">{edu.institution}</h3>
-                <div className="timeline-company">{edu.degree}</div>
-                <p className="timeline-desc">{edu.grade}</p>
+                <span className="timeline-date"><TypeWriter text={edu.duration} speed={30} cursor={false} /></span>
+                <TypeWriter tag="h3" className="timeline-role" text={edu.institution} speed={30} />
+                <div className="timeline-company"><TypeWriter text={edu.degree} speed={25} cursor={false} /></div>
+                <TypeWriter tag="p" className="timeline-desc" text={edu.grade} speed={20} cursor={false} />
               </div>
             </div>
           ))}
@@ -506,9 +504,9 @@ function SkillsSection() {
       <ParticleBoxes />
       <div className="section-container">
         <div className="section-header reveal" ref={headerRef}>
-          <span className="section-label">⚡ Skills</span>
-          <h2 className="section-title">Technologies I Work With</h2>
-          <p className="section-subtitle">My toolkit for building great software</p>
+          <span className="section-label"><TypeWriter text="⚡ Skills" speed={40} cursor={false} /></span>
+          <TypeWriter tag="h2" className="section-title" text="Technologies I Work With" speed={40} />
+          <TypeWriter tag="p" className="section-subtitle" text="My toolkit for building great software" speed={20} delay={300} cursor={false} />
         </div>
 
         <div className="skills-showcase" ref={gridRef}>
@@ -516,11 +514,11 @@ function SkillsSection() {
             <div key={category} className={`skill-group glow-card reveal-scale stagger-${i + 1}`}>
               <div className="skill-group-header">
                 <div className="skill-group-icon">{data.icon}</div>
-                <h4 className="skill-group-title">{category}</h4>
+                <h4 className="skill-group-title"><TypeWriter text={category} speed={30} cursor={false} /></h4>
               </div>
               <div className="skill-tags">
                 {data.items.map((skill) => (
-                  <span key={skill} className="skill-tag">{skill}</span>
+                  <span key={skill} className="skill-tag"><TypeWriter text={skill} speed={30} cursor={false} /></span>
                 ))}
               </div>
             </div>
@@ -542,9 +540,9 @@ function ProjectsSection() {
       <ParticleBoxes />
       <div className="section-container">
         <div className="section-header reveal" ref={headerRef}>
-          <span className="section-label">🚀 Projects</span>
-          <h2 className="section-title">What I've Built</h2>
-          <p className="section-subtitle">Applications showcasing my full-stack capabilities</p>
+          <span className="section-label"><TypeWriter text="🚀 Projects" speed={40} cursor={false} /></span>
+          <TypeWriter tag="h2" className="section-title" text="What I've Built" speed={40} />
+          <TypeWriter tag="p" className="section-subtitle" text="Applications showcasing my full-stack capabilities" speed={18} delay={300} cursor={false} />
         </div>
 
         <div className="projects-grid" ref={gridRef}>
@@ -557,11 +555,11 @@ function ProjectsSection() {
                 </div>
               </div>
               <div className="project-card-body">
-                <h3 className="project-card-title">{project.name}</h3>
-                <p className="project-card-desc">{project.description}</p>
+                <TypeWriter tag="h3" className="project-card-title" text={project.name} speed={30} />
+                <TypeWriter tag="p" className="project-card-desc" text={project.description} speed={10} delay={200} cursor={false} />
                 <div className="project-tech-tags">
                   {project.technologies.map((tech) => (
-                    <span key={tech} className="project-tech-tag">{tech}</span>
+                    <span key={tech} className="project-tech-tag"><TypeWriter text={tech} speed={30} cursor={false} /></span>
                   ))}
                 </div>
                 <div className="project-links">
@@ -597,9 +595,9 @@ function CertificationsSection() {
     <section className="section" id="certifications">
       <div className="section-container">
         <div className="section-header reveal" ref={headerRef}>
-          <span className="section-label">🏆 Certifications</span>
-          <h2 className="section-title">Credentials & Achievements</h2>
-          <p className="section-subtitle">Professional certifications I've earned</p>
+          <span className="section-label"><TypeWriter text="🏆 Certifications" speed={40} cursor={false} /></span>
+          <TypeWriter tag="h2" className="section-title" text="Credentials & Achievements" speed={40} />
+          <TypeWriter tag="p" className="section-subtitle" text="Professional certifications I've earned" speed={20} delay={300} cursor={false} />
         </div>
 
         <div className="cert-grid" ref={gridRef}>
@@ -607,8 +605,8 @@ function CertificationsSection() {
             <div key={i} className={`cert-card corner-box shimmer-card reveal stagger-${i + 1}`}>
               <div className={`cert-icon ${cert.style}`}>{cert.emoji}</div>
               <div className="cert-info">
-                <h4>{cert.name}</h4>
-                <p>Professional certification</p>
+                <h4><TypeWriter text={cert.name} speed={25} /></h4>
+                <p><TypeWriter text="Professional certification" speed={20} cursor={false} /></p>
               </div>
             </div>
           ))}
@@ -618,26 +616,26 @@ function CertificationsSection() {
         <div style={{ marginTop: '3rem' }}>
           <div className="achievements-row" ref={gridRef}>
             <div className="achievement-card corner-box shimmer-card reveal stagger-5">
-              <div className="achievement-card-title">🌟 Soft Skills</div>
+              <div className="achievement-card-title"><TypeWriter text="🌟 Soft Skills" speed={35} cursor={false} /></div>
               <div className="achievement-tags">
                 {portfolioData.achievements.softSkills.map((skill) => (
-                  <span key={skill} className="achievement-tag">{skill}</span>
+                  <span key={skill} className="achievement-tag"><TypeWriter text={skill} speed={25} cursor={false} /></span>
                 ))}
               </div>
             </div>
             <div className="achievement-card corner-box shimmer-card reveal stagger-6">
-              <div className="achievement-card-title">🌐 Languages</div>
+              <div className="achievement-card-title"><TypeWriter text="🌐 Languages" speed={35} cursor={false} /></div>
               <div className="achievement-tags">
                 {portfolioData.achievements.languages.map((lang) => (
-                  <span key={lang} className="achievement-tag lang">{lang}</span>
+                  <span key={lang} className="achievement-tag lang"><TypeWriter text={lang} speed={30} cursor={false} /></span>
                 ))}
               </div>
             </div>
             <div className="achievement-card corner-box shimmer-card reveal stagger-7">
-              <div className="achievement-card-title">🏅 Awards</div>
+              <div className="achievement-card-title"><TypeWriter text="🏅 Awards" speed={35} cursor={false} /></div>
               <div className="achievement-tags">
                 {portfolioData.achievements.awards.map((award) => (
-                  <span key={award} className="achievement-tag award">{award}</span>
+                  <span key={award} className="achievement-tag award"><TypeWriter text={award} speed={20} cursor={false} /></span>
                 ))}
               </div>
             </div>
@@ -666,9 +664,9 @@ function ContactSection() {
     <section className="section contact-section-bg" id="contact">
       <div className="section-container">
         <div className="section-header reveal" ref={headerRef}>
-          <span className="section-label">📬 Contact</span>
-          <h2 className="section-title">Let's Work Together</h2>
-          <p className="section-subtitle">Have a project in mind? Let's connect and build something amazing</p>
+          <span className="section-label"><TypeWriter text="📬 Contact" speed={40} cursor={false} /></span>
+          <TypeWriter tag="h2" className="section-title" text="Let's Work Together" speed={40} />
+          <TypeWriter tag="p" className="section-subtitle" text="Have a project in mind? Let's connect and build something amazing" speed={18} delay={300} cursor={false} />
         </div>
 
         <div className="contact-grid" ref={gridRef}>
@@ -682,8 +680,8 @@ function ContactSection() {
               <Tag key={i} className={`contact-card reveal stagger-${i + 1}`} {...linkProps}>
                 <div className={`contact-card-icon ${contact.style}`}>{contact.icon}</div>
                 <div className="contact-card-content">
-                  <div className="contact-card-label">{contact.label}</div>
-                  <div className="contact-card-value">{contact.value}</div>
+                  <div className="contact-card-label"><TypeWriter text={contact.label} speed={35} cursor={false} /></div>
+                  <div className="contact-card-value"><TypeWriter text={contact.value} speed={25} cursor={false} /></div>
                 </div>
               </Tag>
             )
@@ -726,7 +724,7 @@ function App() {
       <footer className="footer">
         <div className="footer-content">
           <p className="footer-text">
-            Designed & Built by <strong>{portfolioData.profile.name}</strong> with <span className="heart">❤️</span>
+            <TypeWriter text={`Designed & Built by ${portfolioData.profile.name} with`} speed={20} cursor={false} /> <span className="heart">❤️</span>
           </p>
           <div className="footer-links">
             <a href={`mailto:${portfolioData.profile.email}`} className="footer-link">Email</a>

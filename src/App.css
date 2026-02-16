@@ -1919,6 +1919,58 @@
 }
 
 /* ================================================
+   TYPEWRITER EFFECT
+   ================================================ */
+.typewriter-wrap {
+  position: relative;
+  display: inline;
+}
+
+/* invisible duplicate that holds the final width/height */
+.tw-sizer {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  white-space: pre-wrap;
+  /* sizer just reserves space; actual text is rendered normally */
+}
+
+/* keep sizer in flow for block-level tags (h2, p, div) */
+h1.typewriter-wrap .tw-sizer,
+h2.typewriter-wrap .tw-sizer,
+h3.typewriter-wrap .tw-sizer,
+h4.typewriter-wrap .tw-sizer,
+p.typewriter-wrap .tw-sizer,
+div.typewriter-wrap .tw-sizer {
+  position: relative;
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+
+.tw-cursor {
+  display: inline-block;
+  color: var(--accent-violet);
+  font-weight: 300;
+  animation: twBlink 0.7s step-end infinite;
+  margin-left: 1px;
+}
+
+@keyframes twBlink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ================================================
    RESPONSIVE
    ================================================ */
 @media (max-width: 768px) {
