@@ -7,38 +7,38 @@
 }
 
 :root {
-  /* Core palette */
-  --bg-primary: #05060f;
-  --bg-secondary: #0a0b1a;
-  --bg-card: rgba(15, 17, 40, 0.7);
-  --bg-card-hover: rgba(25, 28, 60, 0.85);
+  /* Core palette – clean light theme */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --bg-card-hover: rgba(255, 255, 255, 0.95);
 
   /* Accent colors */
-  --accent-violet: #7c3aed;
-  --accent-blue: #3b82f6;
-  --accent-cyan: #06b6d4;
-  --accent-emerald: #10b981;
-  --accent-rose: #f43f5e;
-  --accent-amber: #f59e0b;
+  --accent-violet: #6d28d9;
+  --accent-blue: #2563eb;
+  --accent-cyan: #0891b2;
+  --accent-emerald: #059669;
+  --accent-rose: #e11d48;
+  --accent-amber: #d97706;
 
   /* Gradients */
-  --gradient-hero: linear-gradient(135deg, #7c3aed 0%, #3b82f6 50%, #06b6d4 100%);
-  --gradient-violet-blue: linear-gradient(135deg, #7c3aed, #3b82f6);
-  --gradient-blue-cyan: linear-gradient(135deg, #3b82f6, #06b6d4);
-  --gradient-cyan-emerald: linear-gradient(135deg, #06b6d4, #10b981);
-  --gradient-rose-amber: linear-gradient(135deg, #f43f5e, #f59e0b);
-  --gradient-card-border: linear-gradient(135deg, rgba(124, 58, 237, 0.4), rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.4));
-  --gradient-glow: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
+  --gradient-hero: linear-gradient(135deg, #6d28d9 0%, #2563eb 50%, #0891b2 100%);
+  --gradient-violet-blue: linear-gradient(135deg, #6d28d9, #2563eb);
+  --gradient-blue-cyan: linear-gradient(135deg, #2563eb, #0891b2);
+  --gradient-cyan-emerald: linear-gradient(135deg, #0891b2, #059669);
+  --gradient-rose-amber: linear-gradient(135deg, #e11d48, #d97706);
+  --gradient-card-border: linear-gradient(135deg, rgba(109, 40, 217, 0.3), rgba(37, 99, 235, 0.1), rgba(8, 145, 178, 0.3));
+  --gradient-glow: radial-gradient(circle, rgba(109, 40, 217, 0.08) 0%, transparent 70%);
 
-  /* Text */
-  --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
+  /* Text – dark on light */
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
 
   /* Glass */
-  --glass-bg: rgba(15, 17, 40, 0.6);
-  --glass-border: rgba(124, 58, 237, 0.15);
-  --glass-hover-border: rgba(124, 58, 237, 0.4);
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(109, 40, 217, 0.12);
+  --glass-hover-border: rgba(109, 40, 217, 0.35);
 
   /* Misc */
   --border-radius: 16px;
