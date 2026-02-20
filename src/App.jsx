@@ -169,7 +169,7 @@ function useScrollRevealAll(selector, containerRef) {
           }
         })
       },
-      { threshold: 0.1 }
+      { threshold: 0.08 }
     )
 
     elements.forEach((el) => observer.observe(el))
@@ -368,7 +368,7 @@ function AboutSection() {
   return (
     <section className="section" id="about">
       <div className="section-container">
-        <div className="section-header reveal" ref={headerRef}>
+        <div className="section-header reveal-blur" ref={headerRef}>
           <span className="section-label"><TypeWriter text="👋 About Me" speed={40} cursor={false} /></span>
           <TypeWriter tag="h2" className="section-title" text="Know Who I Am" speed={40} />
           <TypeWriter tag="p" className="section-subtitle" text="A quick look at my background and what drives me" speed={20} delay={300} cursor={false} />
@@ -425,13 +425,12 @@ function AboutSection() {
 function ExperienceSection() {
   const headerRef = useScrollReveal()
   const timelineRef = useRef(null)
-  useScrollRevealAll('.reveal', timelineRef)
+  useScrollRevealAll('.reveal-slide-blur, .reveal', timelineRef)
 
   return (
     <section className="section" id="experience" style={{ position: 'relative' }}>
-      <ParticleBoxes />
       <div className="section-container">
-        <div className="section-header reveal" ref={headerRef}>
+        <div className="section-header reveal-blur" ref={headerRef}>
           <span className="section-label"><TypeWriter text="💼 Experience" speed={40} cursor={false} /></span>
           <TypeWriter tag="h2" className="section-title" text="My Professional Journey" speed={40} />
           <TypeWriter tag="p" className="section-subtitle" text="Roles where I've grown as a developer" speed={20} delay={300} cursor={false} />
@@ -439,7 +438,7 @@ function ExperienceSection() {
 
         <div className="timeline" ref={timelineRef}>
           {portfolioData.experience.map((exp, i) => (
-            <div key={i} className={`timeline-item reveal stagger-${i + 1}`}>
+            <div key={i} className={`timeline-item reveal-slide-blur stagger-${i + 1}`}>
               <div className="timeline-dot"></div>
               <div className="timeline-card shimmer-card corner-box">
                 <span className="timeline-date"><TypeWriter text={exp.duration} speed={30} cursor={false} /></span>
@@ -459,12 +458,12 @@ function ExperienceSection() {
 function EducationSection() {
   const headerRef = useScrollReveal()
   const gridRef = useRef(null)
-  useScrollRevealAll('.reveal', gridRef)
+  useScrollRevealAll('.reveal-slide-blur, .reveal', gridRef)
 
   return (
     <section className="section" id="education" style={{ position: 'relative' }}>
       <div className="section-container">
-        <div className="section-header reveal" ref={headerRef}>
+        <div className="section-header reveal-blur" ref={headerRef}>
           <span className="section-label"><TypeWriter text="🎓 Education" speed={40} cursor={false} /></span>
           <TypeWriter tag="h2" className="section-title" text="Academic Background" speed={40} />
           <TypeWriter tag="p" className="section-subtitle" text="My educational foundation" speed={20} delay={300} cursor={false} />
@@ -472,7 +471,7 @@ function EducationSection() {
 
         <div className="timeline" ref={gridRef}>
           {portfolioData.education.map((edu, i) => (
-            <div key={i} className={`timeline-item reveal stagger-${i + 1}`}>
+            <div key={i} className={`timeline-item reveal-slide-blur stagger-${i + 1}`}>
               <div className="timeline-dot"></div>
               <div className="timeline-card shimmer-card corner-box">
                 <span className="timeline-date"><TypeWriter text={edu.duration} speed={30} cursor={false} /></span>
@@ -496,9 +495,8 @@ function SkillsSection() {
 
   return (
     <section className="section" id="skills" style={{ position: 'relative' }}>
-      <ParticleBoxes />
       <div className="section-container">
-        <div className="section-header reveal" ref={headerRef}>
+        <div className="section-header reveal-blur" ref={headerRef}>
           <span className="section-label"><TypeWriter text="⚡ Skills" speed={40} cursor={false} /></span>
           <TypeWriter tag="h2" className="section-title" text="Technologies I Work With" speed={40} />
           <TypeWriter tag="p" className="section-subtitle" text="My toolkit for building great software" speed={20} delay={300} cursor={false} />
@@ -528,13 +526,12 @@ function SkillsSection() {
 function ProjectsSection() {
   const headerRef = useScrollReveal()
   const gridRef = useRef(null)
-  useScrollRevealAll('.reveal', gridRef)
+  useScrollRevealAll('.reveal-slide-blur, .reveal', gridRef)
 
   return (
     <section className="section" id="projects" style={{ position: 'relative' }}>
-      <ParticleBoxes />
       <div className="section-container">
-        <div className="section-header reveal" ref={headerRef}>
+        <div className="section-header reveal-blur" ref={headerRef}>
           <span className="section-label"><TypeWriter text="🚀 Projects" speed={40} cursor={false} /></span>
           <TypeWriter tag="h2" className="section-title" text="What I've Built" speed={40} />
           <TypeWriter tag="p" className="section-subtitle" text="Applications showcasing my full-stack capabilities" speed={18} delay={300} cursor={false} />
@@ -542,7 +539,7 @@ function ProjectsSection() {
 
         <div className="projects-grid" ref={gridRef}>
           {portfolioData.projects.map((project, i) => (
-            <div key={i} className={`project-card shimmer-card glow-card tilt-card reveal stagger-${(i % 4) + 1}`}>
+            <div key={i} className={`project-card shimmer-card glow-card tilt-card reveal-slide-blur stagger-${(i % 4) + 1}`}>
               <div className="project-card-header">
                 <div className={`project-gradient-bg gradient-${(i % 4) + 1}`}></div>
                 <div className="project-card-header-content">
@@ -584,12 +581,12 @@ function ProjectsSection() {
 function CertificationsSection() {
   const headerRef = useScrollReveal()
   const gridRef = useRef(null)
-  useScrollRevealAll('.reveal', gridRef)
+  useScrollRevealAll('.reveal-slide-blur, .reveal', gridRef)
 
   return (
     <section className="section" id="certifications">
       <div className="section-container">
-        <div className="section-header reveal" ref={headerRef}>
+        <div className="section-header reveal-blur" ref={headerRef}>
           <span className="section-label"><TypeWriter text="🏆 Certifications" speed={40} cursor={false} /></span>
           <TypeWriter tag="h2" className="section-title" text="Credentials & Achievements" speed={40} />
           <TypeWriter tag="p" className="section-subtitle" text="Professional certifications I've earned" speed={20} delay={300} cursor={false} />
@@ -597,7 +594,7 @@ function CertificationsSection() {
 
         <div className="cert-grid" ref={gridRef}>
           {portfolioData.certifications.map((cert, i) => (
-            <div key={i} className={`cert-card corner-box shimmer-card reveal stagger-${i + 1}`}>
+            <div key={i} className={`cert-card corner-box shimmer-card reveal-slide-blur stagger-${i + 1}`}>
               <div className={`cert-icon ${cert.style}`}>{cert.emoji}</div>
               <div className="cert-info">
                 <h4><TypeWriter text={cert.name} speed={25} /></h4>
@@ -610,7 +607,7 @@ function CertificationsSection() {
         {/* Achievements */}
         <div style={{ marginTop: '3rem' }}>
           <div className="achievements-row" ref={gridRef}>
-            <div className="achievement-card corner-box shimmer-card reveal stagger-5">
+            <div className="achievement-card corner-box shimmer-card reveal-slide-blur stagger-5">
               <div className="achievement-card-title"><TypeWriter text="🌟 Soft Skills" speed={35} cursor={false} /></div>
               <div className="achievement-tags">
                 {portfolioData.achievements.softSkills.map((skill) => (
@@ -618,7 +615,7 @@ function CertificationsSection() {
                 ))}
               </div>
             </div>
-            <div className="achievement-card corner-box shimmer-card reveal stagger-6">
+            <div className="achievement-card corner-box shimmer-card reveal-slide-blur stagger-6">
               <div className="achievement-card-title"><TypeWriter text="🌐 Languages" speed={35} cursor={false} /></div>
               <div className="achievement-tags">
                 {portfolioData.achievements.languages.map((lang) => (
@@ -626,7 +623,7 @@ function CertificationsSection() {
                 ))}
               </div>
             </div>
-            <div className="achievement-card corner-box shimmer-card reveal stagger-7">
+            <div className="achievement-card corner-box shimmer-card reveal-slide-blur stagger-7">
               <div className="achievement-card-title"><TypeWriter text="🏅 Awards" speed={35} cursor={false} /></div>
               <div className="achievement-tags">
                 {portfolioData.achievements.awards.map((award) => (
@@ -645,7 +642,7 @@ function CertificationsSection() {
 function ContactSection() {
   const headerRef = useScrollReveal()
   const gridRef = useRef(null)
-  useScrollRevealAll('.reveal', gridRef)
+  useScrollRevealAll('.reveal-slide-blur, .reveal', gridRef)
 
   const contacts = [
     { icon: '✉️', label: 'Email', value: portfolioData.profile.email, href: `mailto:${portfolioData.profile.email}`, style: 'icon-violet' },
@@ -658,7 +655,7 @@ function ContactSection() {
   return (
     <section className="section contact-section-bg" id="contact">
       <div className="section-container">
-        <div className="section-header reveal" ref={headerRef}>
+        <div className="section-header reveal-blur" ref={headerRef}>
           <span className="section-label"><TypeWriter text="📬 Contact" speed={40} cursor={false} /></span>
           <TypeWriter tag="h2" className="section-title" text="Let's Work Together" speed={40} />
           <TypeWriter tag="p" className="section-subtitle" text="Have a project in mind? Let's connect and build something amazing" speed={18} delay={300} cursor={false} />
@@ -672,7 +669,7 @@ function ContactSection() {
               : {}
 
             return (
-              <Tag key={i} className={`contact-card reveal stagger-${i + 1}`} {...linkProps}>
+              <Tag key={i} className={`contact-card reveal-slide-blur stagger-${i + 1}`} {...linkProps}>
                 <div className={`contact-card-icon ${contact.style}`}>{contact.icon}</div>
                 <div className="contact-card-content">
                   <div className="contact-card-label"><TypeWriter text={contact.label} speed={35} cursor={false} /></div>

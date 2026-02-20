@@ -107,36 +107,24 @@
 }
 
 /* ================================================
-   NOISE OVERLAY & GRID BG
+   NOISE OVERLAY & GRID BG  (hidden)
    ================================================ */
-.noise-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-
+.noise-overlay,
 .grid-bg {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(109, 40, 217, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(109, 40, 217, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
+  display: none;
 }
 
 /* ================================================
    SCROLL REVEAL SYSTEM
    ================================================ */
+
+/* ── Fade + Slide Up ── */
 .reveal {
   opacity: 0;
   transform: translateY(60px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.visible {
@@ -144,40 +132,81 @@
   transform: translateY(0);
 }
 
+/* ── Slide from Left ── */
 .reveal-left {
   opacity: 0;
   transform: translateX(-80px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: blur(6px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-left.visible {
   opacity: 1;
   transform: translateX(0);
+  filter: blur(0);
 }
 
+/* ── Slide from Right ── */
 .reveal-right {
   opacity: 0;
   transform: translateX(80px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: blur(6px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-right.visible {
   opacity: 1;
   transform: translateX(0);
+  filter: blur(0);
 }
 
+/* ── Scale In ── */
 .reveal-scale {
   opacity: 0;
   transform: scale(0.85);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: blur(4px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-scale.visible {
   opacity: 1;
   transform: scale(1);
+  filter: blur(0);
+}
+
+/* ── Blur Into Focus (no movement, just blur→sharp) ── */
+.reveal-blur {
+  opacity: 0;
+  filter: blur(12px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-blur.visible {
+  opacity: 1;
+  filter: blur(0);
+}
+
+/* ── Slide Up + Blur Combo ── */
+.reveal-slide-blur {
+  opacity: 0;
+  transform: translateY(40px);
+  filter: blur(8px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-slide-blur.visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
 }
 
 /* Staggered delays for children */
@@ -213,6 +242,14 @@
   transition-delay: 0.8s;
 }
 
+.stagger-9 {
+  transition-delay: 0.9s;
+}
+
+.stagger-10 {
+  transition-delay: 1s;
+}
+
 /* ================================================
    HERO SECTION
    ================================================ */
@@ -226,41 +263,9 @@
   overflow: hidden;
 }
 
-/* Floating orbs */
+/* Floating orbs (hidden) */
 .hero-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.12;
-  pointer-events: none;
-  will-change: transform;
-}
-
-.hero-orb-1 {
-  width: 500px;
-  height: 500px;
-  background: var(--accent-violet);
-  top: -10%;
-  left: -10%;
-  animation: orbFloat1 12s ease-in-out infinite;
-}
-
-.hero-orb-2 {
-  width: 400px;
-  height: 400px;
-  background: var(--accent-blue);
-  bottom: -5%;
-  right: -5%;
-  animation: orbFloat2 15s ease-in-out infinite;
-}
-
-.hero-orb-3 {
-  width: 300px;
-  height: 300px;
-  background: var(--accent-cyan);
-  top: 40%;
-  right: 20%;
-  animation: orbFloat3 10s ease-in-out infinite;
+  display: none;
 }
 
 @keyframes orbFloat1 {
@@ -307,113 +312,10 @@
   }
 }
 
-/* ═══ FLOATING GEOMETRIC BOXES ═══ */
-.floating-boxes-container {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 1;
-}
-
+/* ═══ FLOATING GEOMETRIC BOXES (hidden) ═══ */
+.floating-boxes-container,
 .floating-box {
-  position: absolute;
-  border: 1px solid rgba(109, 40, 217, 0.1);
-  border-radius: 8px;
-  background: rgba(109, 40, 217, 0.02);
-  backdrop-filter: blur(2px);
-  will-change: transform;
-}
-
-.floating-box::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(135deg, rgba(109, 40, 217, 0.08), transparent);
-}
-
-.floating-box-1 {
-  width: 60px;
-  height: 60px;
-  top: 15%;
-  left: 8%;
-  animation: floatBox1 18s ease-in-out infinite;
-}
-
-.floating-box-2 {
-  width: 45px;
-  height: 45px;
-  top: 25%;
-  right: 12%;
-  border-color: rgba(37, 99, 235, 0.1);
-  background: rgba(37, 99, 235, 0.02);
-  animation: floatBox2 22s ease-in-out infinite;
-}
-
-.floating-box-3 {
-  width: 80px;
-  height: 80px;
-  bottom: 20%;
-  left: 15%;
-  border-color: rgba(8, 145, 178, 0.08);
-  background: rgba(8, 145, 178, 0.015);
-  animation: floatBox3a 20s ease-in-out infinite;
-  border-radius: 12px;
-}
-
-.floating-box-4 {
-  width: 35px;
-  height: 35px;
-  top: 60%;
-  right: 8%;
-  border-color: rgba(225, 29, 72, 0.1);
-  background: rgba(225, 29, 72, 0.02);
-  animation: floatBox4 16s ease-in-out infinite;
-}
-
-.floating-box-5 {
-  width: 50px;
-  height: 50px;
-  top: 10%;
-  right: 30%;
-  border-color: rgba(5, 150, 105, 0.08);
-  background: rgba(16, 185, 129, 0.02);
-  animation: floatBox5 24s ease-in-out infinite;
-  border-radius: 50%;
-}
-
-.floating-box-6 {
-  width: 70px;
-  height: 70px;
-  bottom: 15%;
-  right: 20%;
-  border-color: rgba(217, 119, 6, 0.08);
-  background: rgba(217, 119, 6, 0.015);
-  animation: floatBox6 19s ease-in-out infinite;
-  border-radius: 4px;
-}
-
-.floating-box-7 {
-  width: 40px;
-  height: 40px;
-  top: 45%;
-  left: 5%;
-  border-color: rgba(109, 40, 217, 0.12);
-  background: rgba(109, 40, 217, 0.03);
-  animation: floatBox7 15s ease-in-out infinite;
-  transform: rotate(45deg);
-}
-
-.floating-box-8 {
-  width: 55px;
-  height: 55px;
-  bottom: 35%;
-  left: 35%;
-  border-color: rgba(37, 99, 235, 0.08);
-  background: rgba(59, 130, 246, 0.02);
-  animation: floatBox8 21s ease-in-out infinite;
-  border-radius: 14px;
+  display: none;
 }
 
 @keyframes floatBox1 {
@@ -1813,81 +1715,10 @@
   transition: transform 0.2s ease-out;
 }
 
-/* ─── SECTION PARTICLE BOXES ─── */
-.particle-boxes {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 0;
-}
-
+/* ─── SECTION PARTICLE BOXES (hidden) ─── */
+.particle-boxes,
 .particle-box {
-  position: absolute;
-  border: 1px solid rgba(109, 40, 217, 0.06);
-  border-radius: 4px;
-  background: rgba(109, 40, 217, 0.015);
-}
-
-.particle-box:nth-child(1) {
-  width: 30px;
-  height: 30px;
-  top: 10%;
-  right: 5%;
-  animation: particleDrift 12s ease-in-out infinite;
-}
-
-.particle-box:nth-child(2) {
-  width: 20px;
-  height: 20px;
-  bottom: 15%;
-  left: 8%;
-  border-color: rgba(37, 99, 235, 0.06);
-  animation: particleDrift 16s ease-in-out infinite reverse;
-}
-
-.particle-box:nth-child(3) {
-  width: 25px;
-  height: 25px;
-  top: 50%;
-  left: 3%;
-  border-color: rgba(8, 145, 178, 0.06);
-  border-radius: 50%;
-  animation: particleDrift 14s ease-in-out infinite 2s;
-}
-
-.particle-box:nth-child(4) {
-  width: 18px;
-  height: 18px;
-  top: 30%;
-  right: 10%;
-  border-color: rgba(5, 150, 105, 0.08);
-  animation: particleDrift 18s ease-in-out infinite 4s;
-  transform: rotate(45deg);
-}
-
-@keyframes particleDrift {
-
-  0%,
-  100% {
-    transform: translate(0, 0) rotate(0deg);
-    opacity: 0.3;
-  }
-
-  25% {
-    transform: translate(15px, -20px) rotate(90deg);
-    opacity: 0.7;
-  }
-
-  50% {
-    transform: translate(-10px, 15px) rotate(180deg);
-    opacity: 0.4;
-  }
-
-  75% {
-    transform: translate(8px, -8px) rotate(270deg);
-    opacity: 0.8;
-  }
+  display: none;
 }
 
 /* ─── BOX PULSE ANIMATION FOR STATS ─── */
