@@ -334,20 +334,24 @@ function HeroSection() {
 
         <div className="hero-stats">
           <div className="hero-stat box-pulse">
+            <div className="hero-stat-icon">💼</div>
             <div className="hero-stat-number"><TypeWriter text="3+" speed={80} delay={2600} cursor={false} /></div>
-            <div className="hero-stat-label"><TypeWriter text="💼 Internships" speed={40} delay={2700} cursor={false} /></div>
+            <div className="hero-stat-label"><TypeWriter text="Internships" speed={40} delay={2700} cursor={false} /></div>
           </div>
           <div className="hero-stat box-pulse">
+            <div className="hero-stat-icon">🚀</div>
             <div className="hero-stat-number"><TypeWriter text="8" speed={80} delay={2800} cursor={false} /></div>
-            <div className="hero-stat-label"><TypeWriter text="🚀 Projects" speed={40} delay={2900} cursor={false} /></div>
+            <div className="hero-stat-label"><TypeWriter text="Projects" speed={40} delay={2900} cursor={false} /></div>
           </div>
           <div className="hero-stat box-pulse">
+            <div className="hero-stat-icon">🏆</div>
             <div className="hero-stat-number"><TypeWriter text="4" speed={80} delay={3000} cursor={false} /></div>
-            <div className="hero-stat-label"><TypeWriter text="🏆 Certifications" speed={40} delay={3100} cursor={false} /></div>
+            <div className="hero-stat-label"><TypeWriter text="Certifications" speed={40} delay={3100} cursor={false} /></div>
           </div>
           <div className="hero-stat box-pulse">
+            <div className="hero-stat-icon">📊</div>
             <div className="hero-stat-number"><TypeWriter text="8.0" speed={80} delay={3200} cursor={false} /></div>
-            <div className="hero-stat-label"><TypeWriter text="📊 CGPA" speed={40} delay={3300} cursor={false} /></div>
+            <div className="hero-stat-label"><TypeWriter text="CGPA" speed={40} delay={3300} cursor={false} /></div>
           </div>
         </div>
       </div>
